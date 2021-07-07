@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
-                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
                     launchMainActivity();
                 } else {
                     Toast.makeText(LoginActivity.this, "Issue with log-in", Toast.LENGTH_SHORT).show();

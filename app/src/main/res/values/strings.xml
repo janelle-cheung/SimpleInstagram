@@ -7,4 +7,7 @@
     <string name="signup">Sign up</string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="logout">Logout</string>
+    <string name="take_pic">Take picture</string>
+    <string name="submit">Submit</string>
+    <string name="description_hint">Write a description</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.simpleinstagram;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -30,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         if (ParseUser.getCurrentUser() != null) {
-            goToMainActivity();
+            // launchMainActivity();
         }
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +42,13 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
+        binding.btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchSignupActivity();
+            }
+        });
     }
 
     private void loginUser(String username, String password) {
@@ -48,21 +56,30 @@ public class LoginActivity extends AppCompatActivity {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if (e != null) {
+                if (e == null) {
+                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT);
+                    launchMainActivity();
+                } else {
                     Toast.makeText(LoginActivity.this, "Issue with log-in", Toast.LENGTH_SHORT);
                     return;
                 }
-                goToMainActivity();
-                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT);
             }
         });
     }
 
-    private void goToMainActivity() {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void launchMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
     }
 
-
+    private void launchSignupActivity() {
+        Intent i = new Intent(this, SignupActivity.class);
+        startActivity(i);
+    }
 }

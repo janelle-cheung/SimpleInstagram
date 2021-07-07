@@ -32,6 +32,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,6 +75,14 @@ public class MainActivity extends AppCompatActivity {
                 }
                 ParseUser currUser = ParseUser.getCurrentUser();
                 savePost(description, currUser, photoFile);
+            }
+        });
+
+        binding.btnGoToFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, FeedActivity.class);
+                startActivity(i);
             }
         });
     }

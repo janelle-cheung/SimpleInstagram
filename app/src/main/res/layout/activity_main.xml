@@ -21,7 +21,7 @@
     <ImageView
         android:id="@+id/ivPostImage"
         android:layout_width="wrap_content"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:layout_below="@+id/btnCaptureImage"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="25dp"
@@ -47,9 +47,18 @@
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etDescription"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="30dp"
         android:text="@string/submit" />
+
+    <Button
+        android:id="@+id/btnGoToFeed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:text="@string/go_to_feed" />
 </RelativeLayout>

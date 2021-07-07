@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(view);
 
         if (ParseUser.getCurrentUser() != null) {
-            // launchMainActivity();
+            launchMainActivity();
         }
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -52,15 +52,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        Log.i(TAG, "Attempting to login user " + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (e == null) {
-                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
                     launchMainActivity();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Issue with log-in", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Issue with log-in", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

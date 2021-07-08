@@ -8,14 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.simpleinstagram.databinding.ActivityPostDetailsBinding;
+import com.example.simpleinstagram.fragments.PostsFragment;
+import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 public class PostDetailsActivity extends AppCompatActivity {
-
-    TextView tvUsername;
-    ImageView ivImage;
-    TextView tvCreatedAt;
-    TextView tvDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,14 @@ public class PostDetailsActivity extends AppCompatActivity {
         ActivityPostDetailsBinding binding = ActivityPostDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        Toast.makeText(this, "Post details!", Toast.LENGTH_SHORT).show();
+
+        Post post = (Post) Parcels.unwrap(getIntent().getParcelableExtra(PostsFragment.KEY_CLICKED_POST));
+        binding.tvUsername.setText(post.getUser().getUsername());
+        binding.tvCreatedAt.setText(Post.calculateTimeAgo(post.getCreatedAt()));
+        binding.tvDescription.setText(post.getDescription());
+        ParseFile image = post.getImage();
+        if (image != null) {
+            Glide.with(this).load(image.getUrl()).into(binding.ivImage);
+        }
     }
 }

@@ -24,12 +24,15 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PostsFragment extends Fragment implements PostsAdapter.OnPostListener {
 
     public static final String TAG = "PostFragment";
+    public static final String KEY_CLICKED_POST = "clicked post";
 
     List<Post> posts;
     RecyclerView rvPosts;
@@ -99,6 +102,7 @@ public class PostsFragment extends Fragment implements PostsAdapter.OnPostListen
     public void onPostClicked(int position) {
         Post clickedPost = posts.get(position);
         Intent i = new Intent(getContext(), PostDetailsActivity.class);
+        i.putExtra(KEY_CLICKED_POST, Parcels.wrap(clickedPost));
         startActivity(i);
     }
 }

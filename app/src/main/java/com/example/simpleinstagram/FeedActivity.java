@@ -34,54 +34,5 @@ public class FeedActivity extends AppCompatActivity {
         ActivityFeedBinding binding = ActivityFeedBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
-        posts = new ArrayList<>();
-        rvPosts = binding.rvPosts;
-        adapter = new PostsAdapter(this, posts);
-        rvPosts.setAdapter(adapter);
-        rvPosts.setLayoutManager(new LinearLayoutManager(this));
-        rvPosts.addItemDecoration(new DividerItemDecoration(binding.rvPosts.getContext(), DividerItemDecoration.VERTICAL));
-
-        queryPosts();
-
-        // Setup refresh listener which triggers new data loading
-        swipeContainer = (SwipeRefreshLayout) binding.swipeContainer;
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                queryPosts();
-            }
-        });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-    }
-
-    private void queryPosts() {
-        // Specify which class to query
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        // limit query to latest 20 items
-        query.setLimit(20);
-        // order posts by creation date (newest first)
-        query.addDescendingOrder("createdAt");
-
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e != null) {
-                    Log.e(TAG, "Problem with querying posts ", e);
-                    return;
-                }
-                Log.i(TAG, "Success querying posts");
-                adapter.clear();
-                // save received posts to list and notify adapter of new data
-                posts.addAll(objects);
-                adapter.notifyDataSetChanged();
-                swipeContainer.setRefreshing(false);
-            }
-        });
     }
 }

@@ -135,7 +135,7 @@ public class ComposeFragment extends Fragment {
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            Log.d(TAG, "failed to create directory");
+            Log.e(TAG, "Failed to create directory");
         }
 
         // Return the file target for the photo based on filename

@@ -19,17 +19,19 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
     private Context context;
     private List<Post> posts;
+    private OnPostListener onPostListener;
 
-    public PostsAdapter(Context context, List<Post> posts) {
+    public PostsAdapter(Context context, List<Post> posts, OnPostListener onPostListener) {
         this.context = context;
         this.posts = posts;
+        this.onPostListener = onPostListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, onPostListener);
     }
 
     @Override
@@ -48,17 +50,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvDescription;
+        private OnPostListener onPostListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnPostListener onPostListener) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            this.onPostListener = onPostListener;
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Post post) {
@@ -69,5 +74,14 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
         }
+
+        @Override
+        public void onClick(View v) {
+            onPostListener.onPostClicked(getAdapterPosition());
+        }
+    }
+
+    public interface OnPostListener {
+        void onPostClicked(int position);
     }
 }

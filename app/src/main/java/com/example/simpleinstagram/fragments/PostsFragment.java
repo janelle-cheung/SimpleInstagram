@@ -1,5 +1,6 @@
 package com.example.simpleinstagram.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.simpleinstagram.Post;
+import com.example.simpleinstagram.PostDetailsActivity;
 import com.example.simpleinstagram.PostsAdapter;
 import com.example.simpleinstagram.R;
 import com.parse.FindCallback;
@@ -25,7 +27,7 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostsFragment extends Fragment {
+public class PostsFragment extends Fragment implements PostsAdapter.OnPostListener {
 
     public static final String TAG = "PostFragment";
 
@@ -45,7 +47,7 @@ public class PostsFragment extends Fragment {
         posts = new ArrayList<>();
 
         rvPosts = view.findViewById(R.id.rvPosts);
-        adapter = new PostsAdapter(getContext(), posts);
+        adapter = new PostsAdapter(getContext(), posts, this);
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPosts.addItemDecoration(new DividerItemDecoration(rvPosts.getContext(), DividerItemDecoration.VERTICAL));
@@ -74,7 +76,7 @@ public class PostsFragment extends Fragment {
         // limit query to latest 20 items
         query.setLimit(20);
         // order posts by creation date (newest first)
-        query.addDescendingOrder(Post.KEY_CREATED_AT);
+        query.addDescendingOrder("createdAt");
 
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -91,5 +93,12 @@ public class PostsFragment extends Fragment {
                 swipeContainer.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    public void onPostClicked(int position) {
+        Post clickedPost = posts.get(position);
+        Intent i = new Intent(getContext(), PostDetailsActivity.class);
+        startActivity(i);
     }
 }

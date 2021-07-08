@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.text.Layout;
@@ -25,6 +26,7 @@ public class FeedActivity extends AppCompatActivity {
     List<Post> posts;
     RecyclerView rvPosts;
     PostsAdapter adapter;
+    SwipeRefreshLayout swipeContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,20 @@ public class FeedActivity extends AppCompatActivity {
         rvPosts.addItemDecoration(new DividerItemDecoration(binding.rvPosts.getContext(), DividerItemDecoration.VERTICAL));
 
         queryPosts();
+
+        // Setup refresh listener which triggers new data loading
+        swipeContainer = (SwipeRefreshLayout) binding.swipeContainer;
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPosts();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
     private void queryPosts() {
@@ -59,10 +75,12 @@ public class FeedActivity extends AppCompatActivity {
                     Log.e(TAG, "Problem with querying posts ", e);
                     return;
                 }
-                // save received posts to list and notify adapter of new data
                 Log.i(TAG, "Success querying posts");
+                adapter.clear();
+                // save received posts to list and notify adapter of new data
                 posts.addAll(objects);
                 adapter.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
             }
         });
     }

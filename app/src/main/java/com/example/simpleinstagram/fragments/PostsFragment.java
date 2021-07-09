@@ -72,7 +72,7 @@ public class PostsFragment extends Fragment implements PostsAdapter.OnPostListen
                 android.R.color.holo_red_light);
     }
 
-    private void queryPosts() {
+    public void queryPosts() {
         // Specify which class to query
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);

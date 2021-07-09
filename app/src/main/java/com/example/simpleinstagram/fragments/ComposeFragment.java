@@ -152,12 +152,11 @@ public class ComposeFragment extends Fragment {
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Problem while saving");
-                    Toast.makeText(getContext(), "Problem while saving", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(getContext(), "Successfully saved post", Toast.LENGTH_SHORT).show();
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
+                ((MainActivity)getActivity()).postTransition();
             }
         });
     }

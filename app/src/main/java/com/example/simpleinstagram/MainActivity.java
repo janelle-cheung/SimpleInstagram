@@ -45,11 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     BottomNavigationView bottomNavigationView;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
@@ -104,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         return true;
+    }
+
+    public void postTransition() {
+        fragmentManager.beginTransaction().replace(R.id.flContainer, new PostsFragment()).commit();
+        bottomNavigationView.setSelectedItemId(R.id.action_feed);
     }
 
     private void returnToLoginActivity() {

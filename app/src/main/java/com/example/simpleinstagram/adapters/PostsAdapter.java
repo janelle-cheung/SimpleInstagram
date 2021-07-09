@@ -63,6 +63,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private TextView tvDescription;
         private OnPostListener onPostListener;
         private TextView tvUsername2;
+        private TextView tvTimeAgo;
 
         public ViewHolder(@NonNull View itemView, OnPostListener onPostListener) {
             super(itemView);
@@ -71,6 +72,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvUsername2  = itemView.findViewById(R.id.tvUsername2);
+            tvTimeAgo = itemView.findViewById(R.id.tvTimeAgo);
             this.onPostListener = onPostListener;
             itemView.setOnClickListener(this);
         }
@@ -91,6 +93,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (image != null) {
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             }
+            tvTimeAgo.setText(String.format("%s ago", Post.calculateTimeAgo(post.getCreatedAt())));
         }
 
         @Override

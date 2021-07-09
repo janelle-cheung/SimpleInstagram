@@ -17,6 +17,7 @@ import com.example.simpleinstagram.activities.LoginActivity;
 import com.example.simpleinstagram.databinding.ActivityMainBinding;
 import com.example.simpleinstagram.fragments.ComposeFragment;
 import com.example.simpleinstagram.fragments.PostsFragment;
+import com.example.simpleinstagram.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_profile:
                     default:
-                        fragment = new ComposeFragment();
+                        fragment = new ProfileFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();

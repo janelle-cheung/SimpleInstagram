@@ -75,14 +75,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             itemView.setOnClickListener(this);
         }
 
-        int circleRadius = 100;
         public void bind(Post post) {
             ParseUser user = post.getUser();
             ParseFile profileImage = user.getParseFile("profile_photo");
             if (profileImage != null) {
                 Glide.with(context)
                         .load(profileImage.getUrl())
-                        .transform(new RoundedCorners(circleRadius))
+                        .circleCrop()
                         .into(ivProfileImage);
             }
             tvDescription.setText(post.getDescription());

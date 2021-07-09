@@ -20,10 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import com.example.simpleinstagram.MainActivity;
-import com.example.simpleinstagram.Post;
+import com.example.simpleinstagram.activities.MainActivity;
+import com.example.simpleinstagram.models.Post;
 import com.example.simpleinstagram.R;
-import com.example.simpleinstagram.databinding.FragmentComposeBinding;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;

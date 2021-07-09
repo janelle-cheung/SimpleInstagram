@@ -3,8 +3,6 @@ package com.example.simpleinstagram.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,9 +14,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.simpleinstagram.Post;
-import com.example.simpleinstagram.PostDetailsActivity;
-import com.example.simpleinstagram.PostsAdapter;
+import com.example.simpleinstagram.models.Post;
+import com.example.simpleinstagram.activities.PostDetailsActivity;
+import com.example.simpleinstagram.adapters.PostsAdapter;
 import com.example.simpleinstagram.R;
 import com.parse.FindCallback;
 import com.parse.ParseException;

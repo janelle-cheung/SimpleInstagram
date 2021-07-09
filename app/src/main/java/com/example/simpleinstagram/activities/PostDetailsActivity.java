@@ -1,14 +1,12 @@
-package com.example.simpleinstagram;
+package com.example.simpleinstagram.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.simpleinstagram.models.Post;
 import com.example.simpleinstagram.databinding.ActivityPostDetailsBinding;
 import com.example.simpleinstagram.fragments.PostsFragment;
 import com.parse.ParseFile;

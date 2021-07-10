@@ -36,7 +36,7 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
-                                Toast.makeText(SignupActivity.this, "Account sign-up successful!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "Account sign-up successful", Toast.LENGTH_SHORT).show();
                                 finish();
                             } else {
                                 Toast.makeText(SignupActivity.this, "Issue with sign-up", Toast.LENGTH_SHORT).show();

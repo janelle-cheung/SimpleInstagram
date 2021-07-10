@@ -78,6 +78,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="75dp"
         android:layout_marginEnd="97dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/white"
+        android:scaleType="centerCrop"
         app:srcCompat="@mipmap/ic_instagram_foreground" />
 
 </RelativeLayout>

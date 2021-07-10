@@ -27,7 +27,7 @@ public class PostDetailsActivity extends AppCompatActivity {
         ParseUser user = post.getUser();
         binding.tvUsername.setText(user.getUsername());
         binding.tvUsername2.setText(user.getUsername());
-        binding.tvCreatedAt.setText(String.format("%s ago", Post.calculateTimeAgo(post.getCreatedAt())));
+        binding.tvTimeAgo.setText(String.format("%s ago", Post.calculateTimeAgo(post.getCreatedAt())));
         binding.tvDescription.setText(post.getDescription());
         ParseFile profileImage = user.getParseFile("profile_photo");
         if (profileImage != null) {
